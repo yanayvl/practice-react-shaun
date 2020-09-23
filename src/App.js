@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch,
 } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ArticlesListPage from './pages/ArticlesListPage';
+import ArticlePage from './pages/ArticlePage';
+import NavBar from './NavBar';
 import './App.css';
-import HomePage from './pages/HomePage.js';
-import AboutPage from './pages/AboutPage.js';
-import ArticlesList from './pages/ArticlesList.js'
-import ArticlePage from './pages/ArticlePage.js';
-import NavBar from './NavBar.js';
+import NotFoundPage from './pages/NotFoundPage';
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <NavBar />
-        <div id="page-body">
-          <Route path='/' component={HomePage} exact />
-          <Route path='/about' component={AboutPage} />
-          <Route path='/articles-list' component={ArticlesList} />
-          <Route path='/article/:name' component={ArticlePage} />
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <NavBar />
+          <div id="page-body">
+            <Switch>
+              <Route path="/" component={HomePage} exact />
+              <Route path="/about" component={AboutPage} />
+              <Route path="/articles" component={ArticlesListPage} />
+              <Route path="/article/:name" component={ArticlePage} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
-  );
+      </Router>
+    );
+  }
 }
 
 export default App;
